@@ -8,3 +8,4 @@ downloadname
 downloaddir
 isplaying
 last_fm.yml
+*.pyc

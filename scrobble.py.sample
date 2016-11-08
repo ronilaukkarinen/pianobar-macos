@@ -1,18 +1,27 @@
-#!/usr/bin/env python
+#!/usr/bin/env /usr/local/bin/python
+"""
+Last.fm scrobbling for Pianobar, the command-line Pandora client. Requires Pianobar, Python, pyLast and Last.fm API credentials.
+https://github.com/PromyLOPh/pianobar/
+http://code.google.com/p/pylast/
+http://www.last.fm/api/account
+Installation:
+1) Copy this script and pylast.py to the Pianobar config directory, ~/.config/pianobar/, and make sure this script is executable
+2) Supply your own Last.fm credentials below
+3) Update Pianobar's config file to use this script as its event_command
+"""
 
+import os
 import sys
 import time
 import pylast
-import subprocess
+
+defaulticon = "/Users/rolle/.config/pianobar/pandora.png"
 
 API_KEY = ""
 API_SECRET = ""
 USERNAME = ""
 PASSWORD = ""
 THRESHOLD = 50 # the percentage of the song that must have been played to scrobble
-
-# Run other scripts:
-#subprocess.call("sh ~/.config/pianobar/customscript.sh", shell=True)
 
 def main():
 
@@ -24,6 +33,7 @@ def main():
   artist = fields["artist"]
   album = fields["album"]
   title = fields["title"]
+  appIcon = '/Users/rolle/.config/pianobar/pandora.png'
   song_duration = int(fields["songDuration"])
   song_played = int(fields["songPlayed"])
   network = pylast.LastFMNetwork(api_key = API_KEY, api_secret = API_SECRET, username = USERNAME, password_hash = pylast.md5(PASSWORD))
@@ -33,6 +43,21 @@ def main():
     network.scrobble(artist = artist, title = title, timestamp = song_started)
   if event == "songstart":
     network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration)
+    
+    # The notifier function
+    def notify(title, subtitle, message, appIcon):
+        t = '-title {!r}'.format(title)
+        s = '-subtitle {!r}'.format(subtitle)
+        m = '-message {!r}'.format(message)
+        i = '-appIcon {!r}'.format(appIcon)
+        os.system('terminal-notifier -group pianobar -remove {}'.format(' '.join([m, t, s, i])))
+
+    # Calling the function
+    notify(title    = artist,
+           subtitle = album,
+           message  = title,
+           appIcon = defaulticon)
+
   if event == "songbookmark":
     track = pylast.Track(artist, title, network)
     track.love()

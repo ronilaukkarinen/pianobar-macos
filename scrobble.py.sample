@@ -39,37 +39,47 @@ def main():
   song_duration = int(fields["songDuration"])
   song_played = int(fields["songPlayed"])
   network = pylast.LastFMNetwork(api_key = API_KEY, api_secret = API_SECRET, username = USERNAME, password_hash = pylast.md5(PASSWORD))
-  # events: songstart, songfinish, ???
+
+  # Album art file
+  albumartfile = '/Users/rolle/.config/pianobar/.covers/{0}.jpg'.format(album)
+
+  # events: songstart, songfinish, songlove, songshelf, songban, songbookmark, artistbookmark, stationfetchplaylist, userlogin
   if event == "songfinish" and song_duration > 0 and 100.0 * song_played / song_duration > THRESHOLD:
     song_started = int(time.time() - song_played / 1000.0)
     network.scrobble(artist = artist, title = title, timestamp = song_started)
   if event == "songstart":
-    
+
     # Get album art with sacad
-    albumartfile = '/Users/rolle/.config/pianobar/.covers/{0}.jpg'.format(album)
     albumartcmd = "sacad -t 15 -d -v quiet '{0}' '{1}' 200 '{2}'".format(artist, album, albumartfile)
     os.system(albumartcmd)
-
+   
     # Connect to Last.fm
     network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration)
-    
+
     # The notifier function
     def notify(title, subtitle, message, appIcon):
         t = '-title {!r}'.format(title)
         s = '-subtitle {!r}'.format(subtitle)
         m = '-message {!r}'.format(message)
         i = '-appIcon {!r}'.format(albumartfile)
-        os.system('terminal-notifier -group pianobar -remove {}'.format(' '.join([m, t, s, i])))
-
-    # Calling the function
+        os.system('terminal-notifier -group pianobar -remove {}'.format(' '.join([m, t, s, i]))) 
+    
+    # Calling the notifier function
     notify(title    = title,
            subtitle = station,
            message  = artist + ', ' + album,
            appIcon = albumartfile)
 
-  if event == "songbookmark":
+  if event == "songlove":
     track = pylast.Track(artist, title, network)
     track.love()
+
+    # Calling the notifier function
+    lovecmd = "terminal-notifier -group pianobar -remove -title 'Loved a song' -message '{0} by {1}' -appIcon '{2}'".format(title, artist, albumartfile)
+    os.system(lovecmd)    
+
+  #if event == "stationfetchplaylist":
+    # TODO
 
 if __name__ == "__main__":
   main()

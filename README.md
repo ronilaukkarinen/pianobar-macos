@@ -3,7 +3,14 @@ pianobar for OS X
 
 This is my fork of pianobar settings for OS X.
 
-With pianobar-osx you can achieve a working Command Line Interface music player that plays radio from [Pandora](https://www.pandora.com), scrobbles songs to [Last.fm](http://www.last.fm), fetches an album art and displays a notification on song change.
+With pianobar-osx you can achieve a working Command Line Interface music player that plays radio from [Pandora](https://www.pandora.com), scrobbles songs to [Last.fm](http://www.last.fm) and more. All this with CLI!
+
+## Features
+
+- Notifies about playing songs
+- Loved songs in Pandora are automatically Loved songs in Last.fm
+- Fetches album art for currently playing song and displays it in a notification
+- Scrobbles playing songs to Last.fm
 
 ## Requirements
 

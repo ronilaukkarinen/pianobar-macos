@@ -3,7 +3,7 @@ pianobar for OS X
 
 This is my fork of pianobar settings for OS X.
 
-With pianobar-osx you can achieve a working Command Line Interface music player that plays radio from [Pandora](https://www.pandora.com), scrobbles songs to [Last.fm](http://www.last.fm) and displays a notification on song change.
+With pianobar-osx you can achieve a working Command Line Interface music player that plays radio from [Pandora](https://www.pandora.com), scrobbles songs to [Last.fm](http://www.last.fm), fetches an album art and displays a notification on song change.
 
 ## Requirements
 
@@ -11,6 +11,7 @@ With pianobar-osx you can achieve a working Command Line Interface music player 
 2. pylast python module (included)
 3. [pianobar](https://6xq.net/pianobar/) - pianobar is a free/open-source, console-based client for the personalized online radio Pandora.
 4. python (`brew install python`)
+5. [sacad](https://github.com/desbma/sacad) - Smart Automatic Cover Art Downloader
 
 ## Usage
 

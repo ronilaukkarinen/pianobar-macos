@@ -1,13 +1,9 @@
 Enhanced pianobar for OS X
 ================
 
-This is my fork of pianobar settings for OS X.
+This is rolle's awesome fork of pianobar settings for OS X.
 
 With pianobar-osx you can achieve a working Command Line Interface music player that plays radio from [Pandora](https://www.pandora.com), scrobbles songs to [Last.fm](http://www.last.fm) and more. All this with CLI!
-
-![](https://dl.dropboxusercontent.com/u/18447700/pianobar-nowplaying.png "Screenshot")
-
-![](https://dl.dropboxusercontent.com/u/18447700/pianobar-loved-new.png "Screenshot")
 
 ## Features
 
@@ -44,5 +40,12 @@ event_command = /Users/yourusername/.config/pianobar/scrobble.py
 
 4. Rename `scrobble.py.sample` to `scrobble.py` and fill your Last.fm and path information accordingly
 6. Make sure everything is executable by `cd ~/.config/pianobar && sudo chmod +x *.py && sudo chmod +x *.sh && sudo chmod +x *.rb`
-7. Create album for covers `mkdir -p ~/.config/pianobar/.covers`
-8. Run `pianobar` (add alias `alias pianobar='pianobar 2>&1 | grep -v API'` if getting deprecated warnings)
+5. Create album for covers `mkdir -p ~/.config/pianobar/.covers`
+6. To add Mac media keys support, setup [PianoKeys](https://github.com/shayne/PianoKeys)
+7. Run `pianobar`
+
+## Screenshots
+
+![](https://dl.dropboxusercontent.com/u/18447700/pianobar-nowplaying.png "Screenshot")
+
+![](https://dl.dropboxusercontent.com/u/18447700/pianobar-loved-new.png "Screenshot")

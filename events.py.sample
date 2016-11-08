@@ -28,7 +28,7 @@ def main():
   artist = fields["artist"]
   album = fields["album"]
   title = fields["title"]
-  station = fields["stationName"]
+  station = fields["songStationName"]
   cover = fields["coverArt"]  
   song_duration = int(fields["songDuration"])
   song_played = int(fields["songPlayed"])

@@ -10,3 +10,5 @@ isplaying
 last_fm.yml
 *.pyc
 events.py
+ctl
+PianoKeys

@@ -32,7 +32,7 @@ With pianobar-osx you can achieve a working Command Line Interface music player 
 user = your@email.com
 password = YouReXtraHardPassWORd
 control_proxy = http://xxx.xx.xxx.xxx:80
-event_command = /Users/yourusername/.config/pianobar/scrobble.py
+event_command = /Users/yourusername/.config/pianobar/events.py
 
 # Get working proxies (if outside USA): http://proxylist.hidemyass.com/search-1303410#listable
 # With response times: http://www.gatherproxy.com/proxylist/country/?c=United%20States

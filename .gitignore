@@ -1,0 +1,8 @@
+config
+scrobble.py
+state
+durationstation
+downloadname
+downloaddir
+isplaying
+last_fm.yml

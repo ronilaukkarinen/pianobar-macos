@@ -36,6 +36,7 @@ control_proxy = http://xxx.xx.xxx.xxx:80
 event_command = /Users/yourusername/.config/pianobar/scrobble.py
 
 # Get working proxies (if outside USA): http://proxylist.hidemyass.com/search-1303410#listable
+# With response times: http://www.gatherproxy.com/proxylist/country/?c=United%20States
 ````
 
 4. Rename `scrobble.py.sample` to `scrobble.py` and fill your Last.fm and path information accordingly

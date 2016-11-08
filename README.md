@@ -1,4 +1,4 @@
-pianobar for OS X
+pianobar-settings for OS X
 ================
 
 This is my fork of pianobar settings for OS X.

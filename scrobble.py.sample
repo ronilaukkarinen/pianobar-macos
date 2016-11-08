@@ -5,7 +5,7 @@ https://github.com/PromyLOPh/pianobar/
 http://code.google.com/p/pylast/
 http://www.last.fm/api/account
 Installation:
-1) Copy this script and pylast.py to the Pianobar config directory, ~/.config/pianobar/, and make sure this script is executable
+1) Copy this script and pylast.py to the Pianobar config directory, /Users/rolle/.config/pianobar/, and make sure this script is executable
 2) Supply your own Last.fm credentials below
 3) Update Pianobar's config file to use this script as its event_command
 """
@@ -29,7 +29,14 @@ def main():
   lines = sys.stdin.readlines()
   fields = dict([line.strip().split("=", 1) for line in lines])
   
-  # fields: title, artist, album, songDuration, songPlayed, rating, stationName, pRet, pRetStr, wRet, wRetStr
+  # Currently supported events are: artistbookmark, songban, songbookmark,
+  # songexplain, songfinish, songlove, songmove, songshelf, songstart,
+  # stationaddgenre, stationaddmusic, stationaddshared, stationcreate,
+  # stationdelete, stationdeleteartistseed, stationdeletefeedback,
+  # stationdeletesongseed, stationfetchinfo, stationfetchplaylist,
+  # stationfetchgenre stationquickmixtoggle, stationrename, userlogin,
+  # usergetstations
+
   artist = fields["artist"]
   album = fields["album"]
   title = fields["title"]
@@ -42,6 +49,7 @@ def main():
 
   # Album art file
   albumartfile = '/Users/rolle/.config/pianobar/.covers/{0}.jpg'.format(album)
+  loveiconfile = '/Users/rolle/.config/pianobar/love.png'
 
   # events: songstart, songfinish, songlove, songshelf, songban, songbookmark, artistbookmark, stationfetchplaylist, userlogin
   if event == "songfinish" and song_duration > 0 and 100.0 * song_played / song_duration > THRESHOLD:
@@ -75,7 +83,7 @@ def main():
     track.love()
 
     # Calling the notifier function
-    lovecmd = "terminal-notifier -group pianobar -remove -title 'Loved a song' -message '{0} by {1}' -appIcon '{2}'".format(title, artist, albumartfile)
+    lovecmd = "terminal-notifier -group pianobar -remove -title 'Loved a song' -message '{0} by {1}' -appIcon '{2}'".format(title, artist, loveiconfile)
     os.system(lovecmd)    
 
   #if event == "stationfetchplaylist":

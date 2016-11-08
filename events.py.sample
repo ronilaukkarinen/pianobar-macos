@@ -1,0 +1,80 @@
+#!/usr/bin/env /usr/local/bin/python
+API_KEY = ""
+API_SECRET = ""
+USERNAME = ""
+PASSWORD = ""
+THRESHOLD = 50 # the percentage of the song that must have been played to scrobble
+
+import os
+import sys
+import time
+import pylast
+from pync import Notifier
+
+def main():
+
+  event = sys.argv[1]
+  lines = sys.stdin.readlines()
+  fields = dict([line.strip().split("=", 1) for line in lines])
+  
+  # Currently supported events are: artistbookmark, songban, songbookmark,
+  # songexplain, songfinish, songlove, songmove, songshelf, songstart,
+  # stationaddgenre, stationaddmusic, stationaddshared, stationcreate,
+  # stationdelete, stationdeleteartistseed, stationdeletefeedback,
+  # stationdeletesongseed, stationfetchinfo, stationfetchplaylist,
+  # stationfetchgenre stationquickmixtoggle, stationrename, userlogin,
+  # usergetstations
+
+  artist = fields["artist"]
+  album = fields["album"]
+  title = fields["title"]
+  station = fields["stationName"]
+  cover = fields["coverArt"]  
+  song_duration = int(fields["songDuration"])
+  song_played = int(fields["songPlayed"])
+  network = pylast.LastFMNetwork(api_key = API_KEY, api_secret = API_SECRET, username = USERNAME, password_hash = pylast.md5(PASSWORD))
+
+  # Album art file
+  defaulticon = "~/.config/pianobar/pandora.png"  
+  #albumartfile = '~/.config/pianobar/.covers/{0}.jpg'.format(album)
+  loveiconfile = '~/.config/pianobar/love.png'
+
+  # Song info
+  songinfo = "{0} by {1}".format(title, artist)
+
+  if event == "userlogin":
+    
+    # Welcome -notification
+    Notifier.notify('Welcome back!', sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Pianobar Started', subtitle = 'Logged in')
+
+  if event == "songfinish" and song_duration > 0 and 100.0 * song_played / song_duration > THRESHOLD:
+
+    song_started = int(time.time() - song_played / 1000.0)
+    network.scrobble(artist = artist, title = title, timestamp = song_started)
+
+  if event == "songstart":
+
+    # Get album art with sacad
+    #albumartcmd = "sacad -t 15 -d -v quiet '{0}' '{1}' 200 '{2}'".format(artist, album, albumartfile)
+    #os.system(albumartcmd)
+   
+    # Connect to Last.fm
+    network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration)    
+
+    # Notification
+    Notifier.notify(songinfo, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = album, subtitle = station, contentImage = cover)
+
+  if event == "songlove":
+    track = pylast.Track(artist, title, network)
+    track.love()
+
+    # Loved -notification
+    Notifier.notify(songinfo, sender = 'com.apple.automator.pianobar-lover', timeout = 10, title = 'Loved a song', subtitle = station, contentImage = cover)
+
+  if event == "stationfetchplaylist":
+
+    # Fetching songs -notification
+    Notifier.notify('Getting stations', sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Fetching songs...', subtitle = "Let's see what we've got!")
+
+if __name__ == "__main__":
+  main()

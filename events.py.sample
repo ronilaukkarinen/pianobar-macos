@@ -40,7 +40,7 @@ def main():
   loveiconfile = '~/.config/pianobar/love.png'
 
   # Song info
-  songinfo = "{0} by {1}".format(title, artist)
+  #songinfo = "{0} by {1}".format(title, artist)
 
   if event == "userlogin":
     
@@ -62,14 +62,14 @@ def main():
     network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration)    
 
     # Notification
-    Notifier.notify(songinfo, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = album, subtitle = station, contentImage = cover)
+    Notifier.notify(station, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = title, subtitle = artist, contentImage = cover)
 
   if event == "songlove":
     track = pylast.Track(artist, title, network)
     track.love()
 
     # Loved -notification
-    Notifier.notify(songinfo, sender = 'com.apple.automator.pianobar-lover', timeout = 10, title = 'Loved a song', subtitle = station, contentImage = cover)
+    Notifier.notify(artist, sender = 'com.apple.automator.pianobar-lover', timeout = 10, title = 'Loved a song', subtitle = title, contentImage = cover)
 
   if event == "stationfetchplaylist":
 

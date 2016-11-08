@@ -31,4 +31,5 @@ event_command = /Users/yourusername/.config/pianobar/scrobble.py
 
 4. Rename `scrobble.py.sample` to `scrobble.py` and fill your Last.fm and path information accordingly
 6. Make sure everything is executable by `cd ~/.config/pianobar && sudo chmod +x *.py && sudo chmod +x *.sh && sudo chmod +x *.rb`
-7. Run `pianobar`
+7. Create album for covers `mkdir -p ~/.config/pianobar/.covers`
+8. Run `pianobar` (add alias `alias pianobar='pianobar 2>&1 | grep -v API'` if getting deprecated warnings)

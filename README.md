@@ -1,9 +1,11 @@
-pianobar-settings for OS X
+Enhanced pianobar for OS X
 ================
 
 This is my fork of pianobar settings for OS X.
 
 With pianobar-osx you can achieve a working Command Line Interface music player that plays radio from [Pandora](https://www.pandora.com), scrobbles songs to [Last.fm](http://www.last.fm) and more. All this with CLI!
+
+![](https://dl.dropboxusercontent.com/u/18447700/pianobar-loved.png "Screenshot")
 
 ## Features
 

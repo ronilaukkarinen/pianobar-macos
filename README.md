@@ -44,6 +44,10 @@ event_command = /Users/yourusername/.config/pianobar/events.py
 6. To add Mac media keys support, setup [PianoKeys](https://github.com/shayne/PianoKeys)
 7. Run `pianobar`
 
+## Troubleshooting
+
+If Last.fm happens to be down, pianobar won't load any music. You should disable `event_command` line during the downtime or wait it out.
+
 ## Screenshots
 
 ![](https://dl.dropboxusercontent.com/u/18447700/pianobar-nowplaying.png "Screenshot")

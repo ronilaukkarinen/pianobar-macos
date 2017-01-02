@@ -1,6 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env /usr/local/bin/python
 # -*- coding: utf-8 -*-
-
 import os
 import platform
 import subprocess

@@ -48,6 +48,12 @@ event_command = /Users/yourusername/.config/pianobar/events.py
 
 If Last.fm happens to be down, pianobar won't load any music. You should disable `event_command` line during the downtime or wait it out.
 
+If you don't get any notifications or scrobbles, try changing the first line from your events.py to:
+
+``` python
+#!/Library/Frameworks/Python.framework/Versions/2.7/bin/python
+```
+
 ## Screenshots
 
 ![](https://dl.dropboxusercontent.com/u/18447700/pianobar-nowplaying.png "Screenshot")

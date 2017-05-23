@@ -16,7 +16,7 @@ With pianobar-osx you can achieve a working Command Line Interface music player 
 ## Requirements
 
 1. [terminal-notifier](https://github.com/julienXX/terminal-notifier) - Send User Notifications on Mac OS X 10.8 from the command-line.
-2. [pylast](https://github.com/pylast/pylast)
+2. [pylast](https://github.com/pylast/pylast) (**important:** You will need the latest version, install with `easy_install pylast`, not `pip`)
 3. [pianobar](https://6xq.net/pianobar/) - pianobar is a free/open-source, console-based client for the personalized online radio Pandora.
 4. python (`brew install python`)
 5. pync (`pip install pync`)

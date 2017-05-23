@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 API_KEY = ""
 API_SECRET = ""
+THRESHOLD = 50 # The percentage of the song that must have been played to scrobble
 USERNAME = ""
 PASSWORD = ""
 
@@ -10,6 +11,9 @@ import time
 import pylast
 import threading
 from pync import Notifier
+
+network = pylast.LastFMNetwork(api_key=API_KEY, api_secret=API_SECRET,
+                               username=USERNAME, password_hash=pylast.md5(PASSWORD))
 
 def main():
 
@@ -32,8 +36,7 @@ def main():
   cover = fields["coverArt"]  
   song_duration = int(fields["songDuration"])
   song_played = int(fields["songPlayed"])
-  song_started = int(time.time() - song_played)
-  network = pylast.LastFMNetwork(api_key = API_KEY, api_secret = API_SECRET, username = USERNAME, password_hash = pylast.md5(PASSWORD))
+  song_started = int(time.time() - song_duration)
 
   # Album art files
   defaulticon = "~/.config/pianobar/pandora.png"  
@@ -42,13 +45,13 @@ def main():
   if event == "userlogin":
     Notifier.notify('Welcome back!', sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Pianobar Started', subtitle = 'Logged in')
 
+  if event == "songfinish" and song_duration > 0 and 100.0 * song_played / song_duration > THRESHOLD:
+    network.scrobble(artist = artist, title = title, timestamp = song_started)
+    Notifier.notify(title, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Scrobbled!', subtitle = artist, contentImage = cover)
+
   if event == "songstart":
     Notifier.notify(station, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = title, subtitle = artist, contentImage = cover)
     network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration)
-
-    # Scrobble in songstart event, because songfinish doesn't work for some reason when the song ends, only when switching the song
-    network.scrobble(artist = artist, title = title, timestamp = song_started)
-    Notifier.notify(title, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Scrobbled!', subtitle = artist, contentImage = cover)
 
   if event == "songlove":
     track = pylast.Track(artist, title, network)

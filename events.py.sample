@@ -1,9 +1,8 @@
-#!/usr/bin/env /usr/local/bin/python
+#!/usr/bin/env python
 API_KEY = ""
 API_SECRET = ""
 USERNAME = ""
 PASSWORD = ""
-THRESHOLD = 50 # the percentage of the song that must have been played to scrobble
 
 import os
 import sys
@@ -42,15 +41,20 @@ def main():
   # Song info
   #songinfo = "{0} by {1}".format(title, artist)
 
+  song_started = int(time.time() - song_played / 1000.0)
+
   if event == "userlogin":
     
     # Welcome -notification
     Notifier.notify('Welcome back!', sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Pianobar Started', subtitle = 'Logged in')
 
-  if event == "songfinish" and song_duration > 0 and 100.0 * song_played / song_duration > THRESHOLD:
+  if event == "songfinish" and song_played > 30:
 
-    song_started = int(time.time() - song_played / 1000.0)
+    # Scrobble
     network.scrobble(artist = artist, title = title, timestamp = song_started)
+
+    # Notification
+    Notifier.notify('Scrobbled!', sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = title, subtitle = artist, contentImage = cover)
 
   if event == "songstart":
 
@@ -59,7 +63,7 @@ def main():
     #os.system(albumartcmd)
    
     # Connect to Last.fm
-    network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration)    
+    network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration-10)    
 
     # Notification
     Notifier.notify(station, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = title, subtitle = artist, contentImage = cover)

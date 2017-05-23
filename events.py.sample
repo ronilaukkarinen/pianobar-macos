@@ -8,6 +8,7 @@ import os
 import sys
 import time
 import pylast
+import threading
 from pync import Notifier
 
 def main():
@@ -31,53 +32,33 @@ def main():
   cover = fields["coverArt"]  
   song_duration = int(fields["songDuration"])
   song_played = int(fields["songPlayed"])
+  song_started = int(time.time() - song_played)
   network = pylast.LastFMNetwork(api_key = API_KEY, api_secret = API_SECRET, username = USERNAME, password_hash = pylast.md5(PASSWORD))
 
-  # Album art file
+  # Album art files
   defaulticon = "~/.config/pianobar/pandora.png"  
-  #albumartfile = '~/.config/pianobar/.covers/{0}.jpg'.format(album)
   loveiconfile = '~/.config/pianobar/love.png'
 
-  # Song info
-  #songinfo = "{0} by {1}".format(title, artist)
-
-  song_started = int(time.time() - song_played / 1000.0)
-
   if event == "userlogin":
-    
-    # Welcome -notification
     Notifier.notify('Welcome back!', sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Pianobar Started', subtitle = 'Logged in')
 
   if event == "songfinish" and song_played > 30:
-
-    # Scrobble
     network.scrobble(artist = artist, title = title, timestamp = song_started)
 
-    # Notification
-    Notifier.notify('Scrobbled!', sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = title, subtitle = artist, contentImage = cover)
-
   if event == "songstart":
-
-    # Get album art with sacad
-    #albumartcmd = "sacad -t 15 -d -v quiet '{0}' '{1}' 200 '{2}'".format(artist, album, albumartfile)
-    #os.system(albumartcmd)
-   
-    # Connect to Last.fm
-    network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration-10)    
-
-    # Notification
     Notifier.notify(station, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = title, subtitle = artist, contentImage = cover)
+    network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration)
+
+    # Scrobble in songstart event, because songfinish doesn't work for some reason when the song ends, only when switching the song
+    network.scrobble(artist = artist, title = title, timestamp = song_started)
+    Notifier.notify(title, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Scrobbled!', subtitle = artist, contentImage = cover)
 
   if event == "songlove":
     track = pylast.Track(artist, title, network)
     track.love()
-
-    # Loved -notification
     Notifier.notify(artist, sender = 'com.apple.automator.pianobar-lover', timeout = 10, title = 'Loved a song', subtitle = title, contentImage = cover)
 
   if event == "stationfetchplaylist":
-
-    # Fetching songs -notification
     Notifier.notify('Getting stations', sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Fetching songs...', subtitle = "Let's see what we've got!")
 
 if __name__ == "__main__":

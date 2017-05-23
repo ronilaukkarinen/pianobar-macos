@@ -1,4 +1,5 @@
-.covers
+.covers/
+__pycache__/
 *cache*
 config
 scrobble.py

@@ -12,6 +12,7 @@ With pianobar-osx you can achieve a working Command Line Interface music player 
 - Displays currently playing album art in notification
 - Scrobbles playing songs to Last.fm in real time and permanently when played 50% of the song
 - Displays info about changing stations, displays station name in notification
+- Mac OS X Media keys support
 
 ## Requirements
 

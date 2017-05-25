@@ -13,6 +13,7 @@ With pianobar-osx you can achieve a working Command Line Interface music player 
 - Scrobbles playing songs to Last.fm in real time and permanently when played 50% of the song
 - Displays info about changing stations, displays station name in notification
 - Mac OS X Media keys support
+- Displays lyrics while playing from [LyricWiki](http://lyrics.wikia.com/)
 
 ## Requirements
 
@@ -21,6 +22,7 @@ With pianobar-osx you can achieve a working Command Line Interface music player 
 3. [pianobar](https://6xq.net/pianobar/) - pianobar is a free/open-source, console-based client for the personalized online radio Pandora.
 4. python (`brew install python`)
 5. pync (`pip install pync`)
+6. [py-lyrics](https://github.com/tremby/py-lyrics)
 
 ## Usage
 

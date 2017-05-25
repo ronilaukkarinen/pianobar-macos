@@ -9,7 +9,7 @@ import os
 import sys
 import time
 import pylast
-import threading
+import subprocess
 from pync import Notifier
 
 network = pylast.LastFMNetwork(api_key=API_KEY, api_secret=API_SECRET,
@@ -52,6 +52,9 @@ def main():
   if event == "songstart":
     Notifier.notify(station, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = title, subtitle = artist, contentImage = cover)
     network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration)
+
+    subprocess.call('echo Lyrics:', shell = True)
+    subprocess.call('lyrics "{lyrics_artist}" "{lyrics_title}"'.format(lyrics_artist = artist, lyrics_title = title), shell = True)
 
   if event == "songlove":
     track = pylast.Track(artist, title, network)

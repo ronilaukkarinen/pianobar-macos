@@ -63,6 +63,8 @@ If you don't get any notifications or scrobbles, try `which python` and change t
 
 ## Screenshots
 
+![](https://rolle.wtf/pianobar-osx.png "Screenshot")
+
 ![](https://dl.dropboxusercontent.com/u/18447700/pianobar-nowplaying.png "Screenshot")
 
 ![](https://dl.dropboxusercontent.com/u/18447700/pianobar-loved-new.png "Screenshot")

@@ -39,6 +39,10 @@ event_command = /Users/yourusername/.config/pianobar/events.py
 
 # Get working proxies (if outside USA): http://proxylist.hidemyass.com/search-1303410#listable
 # With response times: http://www.gatherproxy.com/proxylist/country/?c=United%20States
+
+# My personal favorite:
+# Uptime: 1463/36, response times: 14ms
+control_proxy = http://107.21.56.41:80
 ````
 
 4. Rename `scrobble.py.sample` to `scrobble.py` and fill your Last.fm and path information accordingly

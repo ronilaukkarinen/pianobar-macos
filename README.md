@@ -45,7 +45,7 @@ event_command = /Users/yourusername/.config/pianobar/events.py
 control_proxy = http://107.21.56.41:80
 ````
 
-4. Rename `scrobble.py.sample` to `scrobble.py` and fill your Last.fm and path information accordingly
+4. Rename `events.py.sample` to `events.py` and fill your Last.fm and path information accordingly
 6. Make sure everything is executable by `cd ~/.config/pianobar && sudo chmod +x *.py && sudo chmod +x *.sh && sudo chmod +x *.rb`
 5. Create album for covers `mkdir -p ~/.config/pianobar/.covers`
 6. To add Mac media keys support, setup [PianoKeys](https://github.com/shayne/PianoKeys)

@@ -65,6 +65,6 @@ If you don't get any notifications or scrobbles, try `which python` and change t
 
 ![](https://rolle.wtf/pianobar-osx.png "Screenshot")
 
-![](https://dl.dropboxusercontent.com/u/18447700/pianobar-nowplaying.png "Screenshot")
+![](https://rolle.wtf/pianobar-nowplaying.png "Screenshot")
 
-![](https://dl.dropboxusercontent.com/u/18447700/pianobar-loved-new.png "Screenshot")
+![](https://rolle.wtf/pianobar-loved-new.png "Screenshot")

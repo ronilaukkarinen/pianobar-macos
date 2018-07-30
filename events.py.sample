@@ -46,7 +46,7 @@ def main():
     Notifier.notify('Welcome back!', sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Pianobar Started', subtitle = 'Logged in')
 
   if event == "songfinish" and song_duration > 0 and 100.0 * song_played / song_duration > THRESHOLD:
-    network.scrobble(artist = artist, title = title, timestamp = song_started)
+    network.scrobble(artist = artist, title = title, album = album, timestamp = song_started)
     Notifier.notify(title, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Scrobbled!', subtitle = artist, contentImage = cover)
 
   if event == "songstart":

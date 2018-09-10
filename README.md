@@ -45,11 +45,12 @@ event_command = /Users/yourusername/.config/pianobar/events.py
 control_proxy = http://107.21.56.41:80
 ````
 
-4. Rename `events.py.sample` to `events.py` and fill your Last.fm and path information accordingly
+4. Rename `events.py.sample` to `events.py`
+5. Edit `events.py` and fill in the Last.fm variables at the top of the script.
 6. Make sure everything is executable by `cd ~/.config/pianobar && sudo chmod +x *.py && sudo chmod +x *.sh && sudo chmod +x *.rb`
-5. Create album for covers `mkdir -p ~/.config/pianobar/.covers`
-6. To add Mac media keys support, setup [PianoKeys](https://github.com/shayne/PianoKeys) (**Note:** If you use Mac OS X Sierra, please use this alias: `alias pianobar='osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && pianobar'`, see [Issue #10](https://github.com/shayne/PianoKeys/issues/10))
-7. Run `pianobar`
+7. Create album for covers `mkdir -p ~/.config/pianobar/.covers`
+8. To add Mac media keys support, setup [PianoKeys](https://github.com/shayne/PianoKeys) (**Note:** If you use Mac OS X Sierra, please use this alias: `alias pianobar='osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && pianobar'`, see [Issue #10](https://github.com/shayne/PianoKeys/issues/10))
+9. Run `pianobar`
 
 ## Troubleshooting
 

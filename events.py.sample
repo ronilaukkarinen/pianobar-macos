@@ -53,7 +53,7 @@ def main():
     Notifier.notify(station, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = title, subtitle = artist, contentImage = cover)
     network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration)
 
-    subprocess.call('echo "{textbar_artist} - {textbar_title}" > /Users/rolle/.config/pianobar/current_song.log'.format(textbar_artist = artist, textbar_title = title), shell = True)
+    subprocess.call('echo "{textbar_artist} - {textbar_title}" > ~/.config/pianobar/current_song.log'.format(textbar_artist = artist, textbar_title = title), shell = True)
     subprocess.call('lyrics "{lyrics_artist}" "{lyrics_title}"'.format(lyrics_artist = artist, lyrics_title = title), shell = True)
     subprocess.call('echo ""', shell = True)
     subprocess.call('echo $(tput setaf 64)Now playing: $(tput setaf 136)"{np_title}"$(tput sgr0) by $(tput setaf 124){np_artist}$(tput sgr0)'.format(np_artist = artist, np_title = title), shell = True)

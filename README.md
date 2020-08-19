@@ -34,7 +34,6 @@ With pianobar-osx you can achieve a working Command Line Interface music player 
 #tls_fingerprint = 2D0AFDAFA16F4B5C0A43F3CB1D4752F9535507C0
 user = your@email.com
 password = YouReXtraHardPassWORd
-control_proxy = http://xxx.xx.xxx.xxx:80
 event_command = /Users/yourusername/.config/pianobar/events.py
 
 # Get working proxies (if outside USA): http://free-proxy.cz/en/proxylist/country/US/all/ping/all

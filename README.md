@@ -63,8 +63,8 @@ If you don't get any notifications or scrobbles, try `which python` and change t
 
 ## Screenshots
 
-![](https://rolle.wtf/pianobar-osx.png "Screenshot")
+![](https://i.imgur.com/VUDCm9o.png "Screenshot")
 
-![](https://rolle.wtf/pianobar-nowplaying.png "Screenshot")
+![](https://i.imgur.com/kYZSMQ7.png "Screenshot")
 
-![](https://rolle.wtf/pianobar-loved-new.png "Screenshot")
+![](https://i.imgur.com/vdnwoYX.png "Screenshot")

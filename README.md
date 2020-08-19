@@ -37,8 +37,8 @@ password = YouReXtraHardPassWORd
 control_proxy = http://xxx.xx.xxx.xxx:80
 event_command = /Users/yourusername/.config/pianobar/events.py
 
-# Get working proxies (if outside USA): http://proxylist.hidemyass.com/search-1303410#listable
-# With response times: http://www.gatherproxy.com/proxylist/country/?c=United%20States
+# Get working proxies (if outside USA): http://free-proxy.cz/en/proxylist/country/US/all/ping/all
+# With response times: https://www.proxynova.com/proxy-server-list/country-us/
 
 # My personal favorite:
 # Uptime: 1463/36, response times: 14ms

@@ -36,12 +36,19 @@ user = your@email.com
 password = YouReXtraHardPassWORd
 event_command = /Users/yourusername/.config/pianobar/events.py
 
-# Get working proxies (if outside USA): http://free-proxy.cz/en/proxylist/country/US/all/ping/all
-# With response times: https://www.proxynova.com/proxy-server-list/country-us/
+# Get working proxies (if outside USA):
+# Best working list:
+# http://www.freeproxylists.net/?c=US&pt=&pr=&a%5B%5D=0&a%5B%5D=1&a%5B%5D=2&u=90
+
+# Other lists:
+# http://proxydb.net/?min_uptime=75&max_response_time=5
+# http://free-proxy.cz/en/proxylist/country/US/all/ping/all
+# https://www.proxynova.com/proxy-server-list/country-us/
 
 # My personal favorite:
 # Uptime: 1463/36, response times: 14ms
-control_proxy = http://107.21.56.41:80
+#control_proxy = http://107.178.9.186:8080 
+control_proxy = http://68.183.99.218:8080
 ````
 
 4. Rename `events.py.sample` to `events.py`

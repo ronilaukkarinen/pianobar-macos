@@ -34,21 +34,26 @@ With pianobar-osx you can achieve a working Command Line Interface music player 
 #tls_fingerprint = 2D0AFDAFA16F4B5C0A43F3CB1D4752F9535507C0
 user = your@email.com
 password = YouReXtraHardPassWORd
-event_command = /Users/yourusername/.config/pianobar/events.py
+event_command = /Users/rolle/.config/pianobar/events.py
 
-# Get working proxies (if outside USA):
-# Best working list:
+# Get working proxies (if outside USA) (most of these don't seem to work after 06/2021):
+# Lists:
 # http://www.freeproxylists.net/?c=US&pt=&pr=&a%5B%5D=0&a%5B%5D=1&a%5B%5D=2&u=90
-
-# Other lists:
-# http://proxydb.net/?min_uptime=75&max_response_time=5
+# http://proxydb.net/?protocol=http&protocol=https&country=US
 # http://free-proxy.cz/en/proxylist/country/US/all/ping/all
 # https://www.proxynova.com/proxy-server-list/country-us/
+# https://www.us-proxy.org/
 
-# My personal favorite:
-# Uptime: 1463/36, response times: 14ms
-#control_proxy = http://107.178.9.186:8080 
-control_proxy = http://68.183.99.218:8080
+#control_proxy = http://localhost:9050
+
+# Or with SOCKS5 and tor:
+# 1) Install: https://github.com/robertkrimen/pianobarproxy/pull/2#issuecomment-853703139
+# 2) brew install tor
+# 3) (New Terminal:) tor
+# 4) (New Terminal:) pianobarproxy -socks5 :9050
+# 5) (New terminal:) pianobar
+
+proxy = http://localhost:9090
 ````
 
 4. Rename `events.py.sample` to `events.py`

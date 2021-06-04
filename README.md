@@ -63,6 +63,12 @@ proxy = http://localhost:9090
 8. To add Mac media keys support, setup [PianoKeys](https://github.com/shayne/PianoKeys) (**Note:** If you use Mac OS X Sierra, please use this alias: `alias pianobar='osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && pianobar'`, see [Issue #10](https://github.com/shayne/PianoKeys/issues/10))
 9. Run `pianobar`
 
+## Alias for tor + pianobar-proxy + pianobar
+
+``` shell
+alias pianobar='unset PYTHONPATH && osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && osascript -e '"'"'tell application "Terminal" to do script "tor"'"'"' && sleep 3 && osascript -e '"'"'tell application "Terminal" to do script "pianobarproxy -socks5 :9050"'"'"' && pianobar'
+```
+
 ## Troubleshooting
 
 If Last.fm happens to be down, pianobar won't load any music. You should disable `event_command` line during the downtime or wait it out.

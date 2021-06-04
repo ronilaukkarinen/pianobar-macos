@@ -66,7 +66,7 @@ proxy = http://localhost:9090
 ## Alias for tor + pianobar-proxy + pianobar
 
 ``` shell
-alias pianobar='unset PYTHONPATH && osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && osascript -e '"'"'tell application "Terminal" to do script "tor"'"'"' && sleep 3 && osascript -e '"'"'tell application "Terminal" to do script "pianobarproxy -socks5 :9050"'"'"' && pianobar'
+alias pianobar='unset PYTHONPATH && osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && osascript -e '"'"'tell application "Terminal" to do script "tor"'"'"' && sleep 3 && osascript -e '"'"'tell application "Terminal" to do script "pianobarproxy -socks5 :9050"'"'"' && sleep 3 && pianobar'
 ```
 
 ## Troubleshooting

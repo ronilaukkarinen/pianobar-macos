@@ -19,7 +19,7 @@ With pianobar-osx you can achieve a working Command Line Interface music player 
 
 1. [terminal-notifier](https://github.com/julienXX/terminal-notifier) - Send User Notifications on Mac OS X 10.8 from the command-line.
 2. [pylast](https://github.com/pylast/pylast) (**important:** You will need the latest version, install with `easy_install pylast`, not `pip`)
-3. [pianobar](https://6xq.net/pianobar/) - pianobar is a free/open-source, console-based client for the personalized online radio Pandora.
+3. [pianobar](https://github.com/PromyLOPh/pianobar) - pianobar is a free/open-source, console-based client for the personalized online radio Pandora.
 4. python (`brew install python`)
 5. pync (`pip install pync`)
 6. [py-lyrics](https://github.com/tremby/py-lyrics)
@@ -34,15 +34,26 @@ With pianobar-osx you can achieve a working Command Line Interface music player 
 #tls_fingerprint = 2D0AFDAFA16F4B5C0A43F3CB1D4752F9535507C0
 user = your@email.com
 password = YouReXtraHardPassWORd
-control_proxy = http://xxx.xx.xxx.xxx:80
-event_command = /Users/yourusername/.config/pianobar/events.py
+event_command = /Users/rolle/.config/pianobar/events.py
 
-# Get working proxies (if outside USA): http://proxylist.hidemyass.com/search-1303410#listable
-# With response times: http://www.gatherproxy.com/proxylist/country/?c=United%20States
+# Get working proxies (if outside USA) (most of these don't seem to work after 06/2021):
+# Lists:
+# http://www.freeproxylists.net/?c=US&pt=&pr=&a%5B%5D=0&a%5B%5D=1&a%5B%5D=2&u=90
+# http://proxydb.net/?protocol=http&protocol=https&country=US
+# http://free-proxy.cz/en/proxylist/country/US/all/ping/all
+# https://www.proxynova.com/proxy-server-list/country-us/
+# https://www.us-proxy.org/
 
-# My personal favorite:
-# Uptime: 1463/36, response times: 14ms
-control_proxy = http://107.21.56.41:80
+#control_proxy = http://localhost:9050
+
+# Or with SOCKS5 and tor:
+# 1) Install: https://github.com/robertkrimen/pianobarproxy/pull/2#issuecomment-853703139
+# 2) brew install tor
+# 3) (New Terminal:) tor
+# 4) (New Terminal:) pianobarproxy -socks5 :9050
+# 5) (New terminal:) pianobar
+
+proxy = http://localhost:9090
 ````
 
 4. Rename `events.py.sample` to `events.py`
@@ -51,6 +62,12 @@ control_proxy = http://107.21.56.41:80
 7. Create album for covers `mkdir -p ~/.config/pianobar/.covers`
 8. To add Mac media keys support, setup [PianoKeys](https://github.com/shayne/PianoKeys) (**Note:** If you use Mac OS X Sierra, please use this alias: `alias pianobar='osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && pianobar'`, see [Issue #10](https://github.com/shayne/PianoKeys/issues/10))
 9. Run `pianobar`
+
+## Alias for tor + pianobar-proxy + pianobar
+
+``` shell
+alias pianobar='unset PYTHONPATH && osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && osascript -e '"'"'tell application "Terminal" to do script "tor"'"'"' && sleep 3 && osascript -e '"'"'tell application "Terminal" to do script "pianobarproxy -socks5 :9050"'"'"' && sleep 3 && pianobar'
+```
 
 ## Troubleshooting
 
@@ -64,8 +81,8 @@ If you don't get any notifications or scrobbles, try `which python` and change t
 
 ## Screenshots
 
-![](https://rolle.wtf/pianobar-osx.png "Screenshot")
+![](https://i.imgur.com/VUDCm9o.png "Screenshot")
 
-![](https://rolle.wtf/pianobar-nowplaying.png "Screenshot")
+![](https://i.imgur.com/kYZSMQ7.png "Screenshot")
 
-![](https://rolle.wtf/pianobar-loved-new.png "Screenshot")
+![](https://i.imgur.com/vdnwoYX.png "Screenshot")

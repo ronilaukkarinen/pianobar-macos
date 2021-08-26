@@ -7,6 +7,7 @@ With pianobar-osx you can achieve a working Command Line Interface music player 
 
 ## Features
 
+- Always connects to Pandora regardless of country (SOCKS5 and Tor)
 - Notifies songs played with pianobar
 - Loved songs in Pandora are automatically Loved songs in Last.fm when marked loved `+` key
 - Displays currently playing album art in notification
@@ -46,7 +47,7 @@ event_command = /Users/rolle/.config/pianobar/events.py
 
 #control_proxy = http://localhost:9050
 
-# Or with SOCKS5 and tor:
+# Or with SOCKS5 and tor (recommended and most reliable!):
 # 1) Install: https://github.com/robertkrimen/pianobarproxy/pull/2#issuecomment-853703139
 # 2) brew install tor
 # 3) (New Terminal:) tor

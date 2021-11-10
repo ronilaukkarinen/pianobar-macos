@@ -49,6 +49,7 @@ event_command = /Users/rolle/.config/pianobar/events.py
 
 # Or with SOCKS5 and tor (recommended and most reliable!):
 # 1) Install: https://github.com/robertkrimen/pianobarproxy/pull/2#issuecomment-853703139
+# (In case that repo gets removed:) Just stumbled upon the same issue. FYI you who google about this like me: You can install pianobarproxy successfully with go get github.com/brendanhoran/pianobarproxy. So sad this isn't merged.
 # 2) brew install tor
 # 3) (New Terminal:) tor
 # 4) (New Terminal:) pianobarproxy -socks5 :9050

@@ -1,9 +1,9 @@
-Enhanced pianobar for OS X
+Enhanced pianobar for macOS
 ================
 
-This is rolle's awesome fork of pianobar settings for OS X.
+This is rolle's awesome fork of pianobar settings for macOS.
 
-With pianobar-osx you can achieve a working Command Line Interface music player that plays radio from [Pandora](https://www.pandora.com), scrobbles songs to [Last.fm](http://www.last.fm) and more. All this with CLI!
+With pianobar-macos you can achieve a working Command Line Interface music player that plays radio from [Pandora](https://www.pandora.com), scrobbles songs to [Last.fm](http://www.last.fm) and more. All this with CLI!
 
 ## Features
 
@@ -13,12 +13,12 @@ With pianobar-osx you can achieve a working Command Line Interface music player 
 - Displays currently playing album art in notification
 - Scrobbles playing songs to Last.fm in real time and permanently when played 50% of the song
 - Displays info about changing stations, displays station name in notification
-- Mac OS X Media keys support
+- macOS Media keys support
 - Displays lyrics while playing from [LyricWiki](http://lyrics.wikia.com/)
 
 ## Requirements
 
-1. [terminal-notifier](https://github.com/julienXX/terminal-notifier) - Send User Notifications on Mac OS X 10.8 from the command-line.
+1. [terminal-notifier](https://github.com/julienXX/terminal-notifier) - Send User Notifications on macOS 10.8 and later from the command-line.
 2. [pylast](https://github.com/pylast/pylast) (**important:** You will need the latest version, install with `easy_install pylast`, not `pip`)
 3. [pianobar](https://github.com/PromyLOPh/pianobar) - pianobar is a free/open-source, console-based client for the personalized online radio Pandora.
 4. python (`brew install python`)
@@ -62,7 +62,7 @@ proxy = http://localhost:9090
 5. Edit `events.py` and fill in the Last.fm variables at the top of the script.
 6. Make sure everything is executable by `cd ~/.config/pianobar && sudo chmod +x *.py && sudo chmod +x *.sh && sudo chmod +x *.rb`
 7. Create album for covers `mkdir -p ~/.config/pianobar/.covers`
-8. To add Mac media keys support, setup [PianoKeys](https://github.com/shayne/PianoKeys) (**Note:** If you use Mac OS X Sierra, please use this alias: `alias pianobar='osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && pianobar'`, see [Issue #10](https://github.com/shayne/PianoKeys/issues/10))
+8. To add Mac media keys support, setup [PianoKeys](https://github.com/shayne/PianoKeys) (**Note:** If you use macOS Sierra or later, please use this alias: `alias pianobar='osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && pianobar'`, see [Issue #10](https://github.com/shayne/PianoKeys/issues/10))
 9. Run `pianobar`
 
 ## Alias for tor + pianobar-proxy + pianobar

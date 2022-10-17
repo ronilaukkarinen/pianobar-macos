@@ -13,8 +13,6 @@ With pianobar-macos you can achieve a working Command Line Interface music playe
 - Displays currently playing album art in notification
 - Scrobbles playing songs to Last.fm in real time and permanently when played 50% of the song
 - Displays info about changing stations, displays station name in notification
-- macOS Media keys support
-- Displays lyrics while playing from [LyricWiki](http://lyrics.wikia.com/)
 
 ## Installation
 
@@ -40,6 +38,32 @@ With pianobar-macos you can achieve a working Command Line Interface music playe
    brew install pianobar
    ```
 
+6. Tor
+   ```bash
+   brew install tor
+   ```
+
+7. [pianobarproxy](https://github.com/robertkrimen/pianobarproxy/pull/2#issuecomment-853703139)
+   ```bash
+   go install github.com/brendanhoran/pianobarproxy@latest
+   ```
+
+8. Add tor config with `sudo nano /opt/homebrew/etc/tor/torrc`:
+
+   ```ini
+   SOCKSPort 9050
+   #SOCKSPolicy accept 192.168.0.0/16
+   #SOCKSPolicy accept6 FC00::/7
+   #SOCKSPolicy reject *
+   Log notice file /opt/homebrew/var/log/tor/notices.log
+   Log debug file /opt/homebrew/var/log/tor/debug.log
+   #Log debug stderr
+   RunAsDaemon 0
+   DataDirectory /opt/homebrew/var/lib/tor
+   #HashedControlPassword 16:872860B76453A77D60CA2BB8C1A7042072093276A3D701AD684053EC4C
+   #CookieAuthentication 1
+   ```
+   
 ## Usage
 
 1. Install requirements (steps above)
@@ -58,30 +82,10 @@ With pianobar-macos you can achieve a working Command Line Interface music playe
    Add following:
 
    ```ini
-   #tls_fingerprint = 2D0AFDAFA16F4B5C0A43F3CB1D4752F9535507C0
-   user = your@email.com
-   password = YouReXtraHardPassWORd
+   user = yourusername@gmail.com
+   password = YourVeryHardPassWordForPandora
    event_command = /Users/rolle/.config/pianobar/events.py
-
-   # Get working proxies (if outside USA) (most of these don't seem to work after 06/2021):
-   # Lists:
-   # http://www.freeproxylists.net/?c=US&pt=&pr=&a%5B%5D=0&a%5B%5D=1&a%5B%5D=2&u=90
-   # http://proxydb.net/?protocol=http&protocol=https&country=US
-   # http://free-proxy.cz/en/proxylist/country/US/all/ping/all
-   # https://www.proxynova.com/proxy-server-list/country-us/
-   # https://www.us-proxy.org/
-   
-   #control_proxy = http://localhost:9050
-   
-   # Or with SOCKS5 and tor (recommended and most reliable!):
-   # 1) Install: https://github.com/robertkrimen/pianobarproxy/pull/2#issuecomment-853703139
-   # (In case that repo gets removed:) Just stumbled upon the same issue. FYI you who google about this like me: You can install pianobarproxy successfully with go get github.com/brendanhoran/pianobarproxy or go install github.com/brendanhoran/pianobarproxy@latest. So sad this isn't merged.
-   # 2) brew install tor
-   # 3) (New Terminal:) tor
-   # 4) (New Terminal:) pianobarproxy -socks5 :9050
-   # 5) (New terminal:) pianobar
-   
-   proxy = http://localhost:9090
+   proxy = http://127.0.0.1:9090
    ```
 
 4. Rename `events.py.sample` to `events.py`:
@@ -98,22 +102,15 @@ With pianobar-macos you can achieve a working Command Line Interface music playe
    ```bash
    mkdir -p $HOME/.config/pianobar/.covers
    ```   
-8. To add Mac media keys support, setup [PianoKeys](https://github.com/shayne/PianoKeys) (**Note:** If you use macOS Sierra or later, please use this alias:
+8. Open three terminal windows and run these, tor and pianobarproxy and pianobar in their separate windows:
    ```bash
-   alias pianobar='osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && pianobar'
-   ```
-   
-   See [Issue #10](https://github.com/shayne/PianoKeys/issues/10))
-9. Run:
-   ```bash
+   unset PYTHONPATH
+   tor
+   export GOPATH=/Users/rolle/go
+   export PATH=$GOPATH/bin:$PATH
+   pianobarproxy -socks5 :9050
    pianobar
    ```
-
-## Alias for tor + pianobar-proxy + pianobar
-
-``` shell
-alias pianobar='unset PYTHONPATH && osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && osascript -e '"'"'tell application "Terminal" to do script "tor"'"'"' && sleep 3 && osascript -e '"'"'tell application "Terminal" to do script "pianobarproxy -socks5 :9050"'"'"' && sleep 3 && pianobar'
-```
 
 ## Troubleshooting
 

@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+API_KEY = ""
+API_SECRET = ""
+THRESHOLD = 50 # The percentage of the song that must have been played to scrobble
+USERNAME = ""
+PASSWORD = ""
+
+import os
+import sys
+import time
+import pylast
+import subprocess
+from pync import Notifier
+
+network = pylast.LastFMNetwork(api_key=API_KEY, api_secret=API_SECRET,
+                               username=USERNAME, password_hash=pylast.md5(PASSWORD))
+
+def main():
+
+  event = sys.argv[1]
+  lines = sys.stdin.readlines()
+  fields = dict([line.strip().split("=", 1) for line in lines])
+  
+  # Currently supported events are: artistbookmark, songban, songbookmark,
+  # songexplain, songfinish, songlove, songmove, songshelf, songstart,
+  # stationaddgenre, stationaddmusic, stationaddshared, stationcreate,
+  # stationdelete, stationdeleteartistseed, stationdeletefeedback,
+  # stationdeletesongseed, stationfetchinfo, stationfetchplaylist,
+  # stationfetchgenre stationquickmixtoggle, stationrename, userlogin,
+  # usergetstations
+
+  artist = fields["artist"]
+  album = fields["album"]
+  title = fields["title"]
+  station = fields["songStationName"]
+  cover = fields["coverArt"]  
+  song_duration = int(fields["songDuration"])
+  song_played = int(fields["songPlayed"])
+  song_started = int(time.time() - song_duration)
+
+  # Album art files
+  defaulticon = "~/.config/pianobar/pandora.png"  
+  loveiconfile = '~/.config/pianobar/love.png'
+
+  if event == "userlogin":
+    Notifier.notify('Welcome back!', sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Pianobar Started', subtitle = 'Logged in')
+
+  if event == "songfinish" and song_duration > 0 and 100.0 * song_played / song_duration > THRESHOLD:
+    network.scrobble(artist = artist, title = title, album = album, timestamp = song_started)
+    Notifier.notify(title, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Scrobbled!', subtitle = artist, contentImage = cover)
+
+  if event == "songstart":
+    Notifier.notify(station, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = title, subtitle = artist, contentImage = cover)
+    network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration)
+
+    subprocess.call('echo "{textbar_artist} - {textbar_title}" > ~/.config/pianobar/current_song.log'.format(textbar_artist = artist, textbar_title = title), shell = True)
+    subprocess.call('lyrics "{lyrics_artist}" "{lyrics_title}"'.format(lyrics_artist = artist, lyrics_title = title), shell = True)
+    subprocess.call('echo ""', shell = True)
+    subprocess.call('echo $(tput setaf 64)Now playing: $(tput setaf 136)"{np_title}"$(tput sgr0) by $(tput setaf 124){np_artist}$(tput sgr0)'.format(np_artist = artist, np_title = title), shell = True)
+    subprocess.call('echo $(tput setaf 7)From station {np_station}$(tput sgr0)'.format(np_station = station), shell = True)
+    subprocess.call('echo ""$(tput sgr0)', shell = True)
+
+  if event == "songlove":
+    track = pylast.Track(artist, title, network)
+    track.love()
+    Notifier.notify(artist, sender = 'com.apple.automator.pianobar-lover', timeout = 10, title = 'Loved a song', subtitle = title, contentImage = cover)
+
+  if event == "stationfetchplaylist":
+    Notifier.notify('Getting stations', sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = 'Fetching songs...', subtitle = "Let's see what we've got!")
+
+if __name__ == "__main__":
+  main()

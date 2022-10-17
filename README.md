@@ -43,42 +43,71 @@ With pianobar-macos you can achieve a working Command Line Interface music playe
 ## Usage
 
 1. Install requirements (steps above)
-2. Clone this repo and move everything to `~/.config/pianobar`.
-3. Add `~/.config/pianobar/config` with following:
+2. Clone this repo and move everything to `~/.config/pianobar`:
 
-````
-#tls_fingerprint = 2D0AFDAFA16F4B5C0A43F3CB1D4752F9535507C0
-user = your@email.com
-password = YouReXtraHardPassWORd
-event_command = /Users/rolle/.config/pianobar/events.py
+   ```bash
+   cd $HOME; git clone https://github.com/ronilaukkarinen/pianobar-macos; cd pianobar-macos; mkdir -p $HOME/.config/pianobar; cp -Rv $HOME/pianobar-macos/* $HOME/.config/pianobar/; rm -rf $HOME/pianobar-macos
+   ```
 
-# Get working proxies (if outside USA) (most of these don't seem to work after 06/2021):
-# Lists:
-# http://www.freeproxylists.net/?c=US&pt=&pr=&a%5B%5D=0&a%5B%5D=1&a%5B%5D=2&u=90
-# http://proxydb.net/?protocol=http&protocol=https&country=US
-# http://free-proxy.cz/en/proxylist/country/US/all/ping/all
-# https://www.proxynova.com/proxy-server-list/country-us/
-# https://www.us-proxy.org/
+3. Edit:
 
-#control_proxy = http://localhost:9050
+   ```bash
+   nano $HOME/.config/pianobar/config
+   ```
+   
+   Add following:
 
-# Or with SOCKS5 and tor (recommended and most reliable!):
-# 1) Install: https://github.com/robertkrimen/pianobarproxy/pull/2#issuecomment-853703139
-# (In case that repo gets removed:) Just stumbled upon the same issue. FYI you who google about this like me: You can install pianobarproxy successfully with go get github.com/brendanhoran/pianobarproxy. So sad this isn't merged.
-# 2) brew install tor
-# 3) (New Terminal:) tor
-# 4) (New Terminal:) pianobarproxy -socks5 :9050
-# 5) (New terminal:) pianobar
+   ```ini
+   #tls_fingerprint = 2D0AFDAFA16F4B5C0A43F3CB1D4752F9535507C0
+   user = your@email.com
+   password = YouReXtraHardPassWORd
+   event_command = /Users/rolle/.config/pianobar/events.py
 
-proxy = http://localhost:9090
-````
+   # Get working proxies (if outside USA) (most of these don't seem to work after 06/2021):
+   # Lists:
+   # http://www.freeproxylists.net/?c=US&pt=&pr=&a%5B%5D=0&a%5B%5D=1&a%5B%5D=2&u=90
+   # http://proxydb.net/?protocol=http&protocol=https&country=US
+   # http://free-proxy.cz/en/proxylist/country/US/all/ping/all
+   # https://www.proxynova.com/proxy-server-list/country-us/
+   # https://www.us-proxy.org/
+   
+   #control_proxy = http://localhost:9050
+   
+   # Or with SOCKS5 and tor (recommended and most reliable!):
+   # 1) Install: https://github.com/robertkrimen/pianobarproxy/pull/2#issuecomment-853703139
+   # (In case that repo gets removed:) Just stumbled upon the same issue. FYI you who google about this like me: You can install pianobarproxy successfully with go get github.com/brendanhoran/pianobarproxy or go install github.com/brendanhoran/pianobarproxy@latest. So sad this isn't merged.
+   # 2) brew install tor
+   # 3) (New Terminal:) tor
+   # 4) (New Terminal:) pianobarproxy -socks5 :9050
+   # 5) (New terminal:) pianobar
+   
+   proxy = http://localhost:9090
+   ```
 
-4. Rename `events.py.sample` to `events.py`
+4. Rename `events.py.sample` to `events.py`:
+   ```bash
+   mv $HOME/.config/pianobar/events.py.sample $HOME/.config/pianobar/events.py
+   ```
+
 5. Edit `events.py` and fill in the Last.fm variables at the top of the script.
-6. Make sure everything is executable by `cd ~/.config/pianobar && sudo chmod +x *.py && sudo chmod +x *.sh && sudo chmod +x *.rb`
-7. Create album for covers `mkdir -p ~/.config/pianobar/.covers`
-8. To add Mac media keys support, setup [PianoKeys](https://github.com/shayne/PianoKeys) (**Note:** If you use macOS Sierra or later, please use this alias: `alias pianobar='osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && pianobar'`, see [Issue #10](https://github.com/shayne/PianoKeys/issues/10))
-9. Run `pianobar`
+6. Make sure everything is executable:
+   ```bash
+   cd $HOME/.config/pianobar && sudo chmod +x *.py && sudo chmod +x *.sh && sudo chmod +x *.rb
+   ```
+7. Create folder for covers:
+   ```bash
+   mkdir -p $HOME/.config/pianobar/.covers
+   ```   
+8. To add Mac media keys support, setup [PianoKeys](https://github.com/shayne/PianoKeys) (**Note:** If you use macOS Sierra or later, please use this alias:
+   ```bash
+   alias pianobar='osascript -e '"'"'tell application "Terminal" to do script "pianokeys"'"'"' && pianobar'
+   ```
+   
+   See [Issue #10](https://github.com/shayne/PianoKeys/issues/10))
+9. Run:
+   ```bash
+   pianobar
+   ```
 
 ## Alias for tor + pianobar-proxy + pianobar
 

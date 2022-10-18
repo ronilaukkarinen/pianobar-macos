@@ -9,11 +9,17 @@ import os
 import sys
 import time
 import pylast
-import subprocess
 from pync import Notifier
 
 network = pylast.LastFMNetwork(api_key=API_KEY, api_secret=API_SECRET,
                                username=USERNAME, password_hash=pylast.md5(PASSWORD))
+
+# ANSI escape sequences for colors
+RESET_STYLE = "\033[0m"  # SGR0
+TITLE_STYLE = "\033[38;5;141m"
+ARTIST_STYLE = "\033[38;5;111m"
+PRELUDE_STYLE = "\033[38;5;123m"
+STATION_STYLE = "\033[38;5;7m"
 
 def main():
 
@@ -53,12 +59,15 @@ def main():
     Notifier.notify(station, sender = 'com.apple.automator.pianobar-sender', timeout = 10, title = title, subtitle = artist, contentImage = cover)
     network.update_now_playing(artist = artist, album = album, title = title, duration = song_duration)
 
-    subprocess.call('echo "{textbar_artist} - {textbar_title}" > ~/.config/pianobar/current_song.log'.format(textbar_artist = artist, textbar_title = title), shell = True)
-    #subprocess.call('lyrics "{lyrics_artist}" "{lyrics_title}"'.format(lyrics_artist = artist, lyrics_title = title), shell = True)
-    subprocess.call('echo ""', shell = True)
-    subprocess.call('echo $(tput setaf 123)Now playing: $(tput setaf 141)"{np_title}"$(tput sgr0) by $(tput setaf 111){np_artist}$(tput sgr0)'.format(np_artist = artist, np_title = title), shell = True)
-    subprocess.call('echo $(tput setaf 7)From station {np_station}$(tput sgr0)'.format(np_station = station), shell = True)
-    subprocess.call('echo ""$(tput sgr0)', shell = True)
+    with open(os.path.expanduser("~/.config/pianobar/current_song.log"), "w") as f:
+        f.write(f"{artist} - {title}\n")
+
+    print(f"""
+
+{PRELUDE_STYLE}Now playing: {TITLE_STYLE}"{title}"{RESET_STYLE} by {ARTIST_STYLE}{artist}{RESET_STYLE}
+{STATION_STYLE}From station {station}{RESET_STYLE}
+""")
+
 
   if event == "songlove":
     track = pylast.Track(artist, title, network)

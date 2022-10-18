@@ -14,6 +14,8 @@ With pianobar-macos you can achieve a working Command Line Interface music playe
 - Scrobbles playing songs to Last.fm in real time and permanently when played 50% of the song
 - Displays info about changing stations, displays station name in notification
 
+<img width="957" alt="Screen-Shot-2022-10-18-09-29-47 82" src="https://user-images.githubusercontent.com/1534150/196352855-23b70839-ffe8-4bbc-9a90-ad2942bfc5ab.png">
+
 ## Installation
 
 1. [terminal-notifier](https://github.com/julienXX/terminal-notifier) - Send User Notifications on macOS 10.8 and later from the command-line:
@@ -121,11 +123,3 @@ If you don't get any notifications or scrobbles, try `which python` and change t
 ``` python
 #!/Library/Frameworks/Python.framework/Versions/2.7/bin/python
 ```
-
-## Screenshots
-
-![](https://i.imgur.com/VUDCm9o.png "Screenshot")
-
-![](https://i.imgur.com/kYZSMQ7.png "Screenshot")
-
-![](https://i.imgur.com/vdnwoYX.png "Screenshot")

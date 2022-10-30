@@ -53,23 +53,13 @@ With pianobar-macos you can achieve a working Command Line Interface music playe
 8. Add tor config with `sudo nano /opt/homebrew/etc/tor/torrc`:
 
    ```ini
-   ExitNodes desync,whistlersmother,lefkada,bettyboop,croeso,TorLuwakOrg,nixnix,inap1,redpineapple,cronic,sasquatch,slowturtle2,moria1,moria2,torxmission,augrime,err,foundry,peertechdata,sasq,0xL37N1Tor,agrippator,3x0rcyst5p4dd3dc311,52c5eSH5,703server,allium,amendment10,Blackmage,BostonUCompSci
-   StrictNodes 1
+   ExitNodes {us} StrictNodes 1
    CircuitBuildTimeout 5
    NumEntryGuards 6
    KeepalivePeriod 60
    NewCircuitPeriod 15
    SOCKSPort 9050
-   #SOCKSPolicy accept 192.168.0.0/16
-   #SOCKSPolicy accept6 FC00::/7
-   #SOCKSPolicy reject *
-   Log notice file /opt/homebrew/var/log/tor/notices.log
-   Log debug file /opt/homebrew/var/log/tor/debug.log
-   #Log debug stderr
    RunAsDaemon 0
-   DataDirectory /opt/homebrew/var/lib/tor
-   #HashedControlPassword 16:872860B76453A77D60CA2BB8C1A7042072093276A3D701AD684053EC4C
-   #CookieAuthentication 1
    ```
    
 ## Usage
